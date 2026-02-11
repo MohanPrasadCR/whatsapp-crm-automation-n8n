@@ -24,6 +24,8 @@ The solution uses workflow automation and AI-driven responses to reduce manual e
 - OpenAI (AI-generated responses)
 - Twilio WhatsApp API
 - Cloud Webhooks
+## Use Case
+Designed for small businesses that rely on WhatsApp for customer communication and want to reduce manual effort while maintaining fast, consistent responses without investing in heavy CRM software.
 
 ## Notes
 - This repository contains the workflow logic and architecture only.
