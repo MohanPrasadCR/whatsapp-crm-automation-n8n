@@ -18,7 +18,7 @@ The solution uses workflow automation and AI-driven responses to reduce manual e
 - Context-aware, polite, WhatsApp-friendly responses
 - Asks clarifying questions instead of guessing
 - Lightweight and cost-effective CRM alternative
-
+https://github.com/MohanPrasadCR/whatsapp-crm-automation-n8n/blob/main/Picture1.png
 ## Tech Stack
 - n8n (Workflow Automation)
 - OpenAI (AI-generated responses)
