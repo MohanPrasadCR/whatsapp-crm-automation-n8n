@@ -13,11 +13,14 @@ The solution uses workflow automation and AI-driven responses to reduce manual e
 - Context-aware responses generated using OpenAI
 - Automated replies sent back via Twilio WhatsApp API
 
+  https://github.com/MohanPrasadCR/whatsapp-crm-automation-n8n/blob/main/5tgEtf0AzQ8ZzRwT-My_workflow.json
+
 ## Features
 - Handles common customer queries automatically
 - Context-aware, polite, WhatsApp-friendly responses
 - Asks clarifying questions instead of guessing
 - Lightweight and cost-effective CRM alternative
+
 https://github.com/MohanPrasadCR/whatsapp-crm-automation-n8n/blob/main/Picture1.png
 ## Tech Stack
 - n8n (Workflow Automation)
