@@ -1,0 +1,115 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-inbound",
+        "responseMode": "=onReceived",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "fd2d5c0a-47f3-4e08-904c-08165c0ba1b0",
+      "name": "Webhook",
+      "webhookId": "2fc6d58e-4d37-46ca-ae25-1bf1ac952b3d"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "role": "system",
+              "content": "=You are SME Sense, an AI assistant for a small retail store.\n\nYour role:\n- If the message is from a customer, respond politely, briefly, and clearly.\n- Help with product availability, offers, prices, store timings, and general questions.\n- Do not invent discounts or prices if unsure.\n\n- If the message is from the shop owner, provide simple business insights based on customer interactions.\n- Keep insights actionable and easy to understand.\n\nGuidelines:\n- Be concise and friendly.\n- Use simple language suitable for WhatsApp.\n- When unsure, ask a clarifying question instead of guessing."
+            },
+            {
+              "content": "={{$node[\"Webhook\"].json[\"body\"][\"Body\"]}}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "afa6e720-92e5-45fc-9e1e-1e0a43b2eb70",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "gafGYUzEDoFeYaef",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "+14155238886",
+        "to": "={{$node[\"Webhook\"].json[\"body\"][\"From\"].replace(\"whatsapp:\", \"\")}}",
+        "toWhatsapp": true,
+        "message": "={{$node[\"Message a model\"].json[\"output\"][0][\"content\"][0][\"text\"]}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        560,
+        0
+      ],
+      "id": "84827b10-aa16-4b1e-951d-9e04b5c982fd",
+      "name": "Send an SMS/MMS/WhatsApp message",
+      "credentials": {
+        "twilioApi": {
+          "id": "LHj7yNhR4D1V25en",
+          "name": "Twilio account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "pinData": {},
+  "triggerCount": 0,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}
